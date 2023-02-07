@@ -1,0 +1,11 @@
+23:59:44 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+'Invoking: GNU Arm Cross Print Size'
+arm-none-eabi-size --format=berkeley "Drivers.elf"
+   text	   data	    bss	    dec	    hex	filename
+   4539	    160	    412	   5111	   13f7	Drivers.elf
+'Finished building: Drivers.siz'
+' '
+
+23:59:44 Build Finished (took 470ms)
+

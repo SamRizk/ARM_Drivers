@@ -1,0 +1,57 @@
+/*
+ * RCC_priv.h
+ *
+ *  Created on: Jan 30, 2023
+ *      Author: samir
+ */
+
+#ifndef RCC_PRIV_H_
+#define RCC_PRIV_H_
+
+
+typedef struct
+{
+	volatile u32 RCC_CR;                    // Clock control register 
+	volatile u32 RCC_PLLCFGR;				// 
+	volatile u32 RCC_CFGR;
+	volatile u32 RCC_CIR;
+	volatile u32 RCC_AHB1RSTR;
+	volatile u32 RCC_AHB2RSTR;
+	volatile u32 RCC_Reserved1;
+	volatile u32 RCC_Reserved2;
+	volatile u32 RCC_APB1RSTR;
+	volatile u32 RCC_APB2RSTR;
+    volatile u32 RCC_Reserved3;
+	volatile u32 RCC_Reserved4;
+	volatile u32 RCC_AHB1ENR;
+	volatile u32 RCC_AHB2ENR;
+    volatile u32 RCC_Reserved5;
+	volatile u32 RCC_Reserved6;
+	volatile u32 RCC_APB1ENR;
+	volatile u32 RCC_APB2ENR;
+    volatile u32 RCC_Reserved7;
+	volatile u32 RCC_Reserved8;
+	volatile u32 RCC_AHB1LPENR;
+	volatile u32 RCC_AHB2LPENR;
+	volatile u32 RCC_Reserved9;
+	volatile u32 RCC_Reserved10;
+	volatile u32 RCC_APB1LPENR;
+	volatile u32 RCC_APB2LPENR;
+	volatile u32 RCC_Reserved11;
+	volatile u32 RCC_Reserved12;
+	volatile u32 RCC_BDCR;
+	volatile u32 RCC_CSR;
+	volatile u32 RCC_Reserved13;
+	volatile u32 RCC_Reserved14;
+	volatile u32 RCC_SSCGR;
+	volatile u32 RCC_PLLI2SCFGR;
+	volatile u32 RCC_Reserved15;
+	volatile u32 RCC_DCKCFGR;
+
+}RCC;
+
+#define RCC_REG ((volatile RCC *)0x40023800)
+
+
+
+#endif /* RCC_PRIV_H_ */

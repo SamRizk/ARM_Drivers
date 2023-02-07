@@ -1,0 +1,117 @@
+/*
+ * RCC_cfg.h
+ *
+ *  Created on: Jan 30, 2023
+ *      Author: samir
+ */
+
+#ifndef RCC_CFG_H_
+#define RCC_CFG_H_
+
+
+/*******************************************************************/
+/*                                                                 */
+/*                      APB high-speed prescaler(APB2)             */
+/*                      APB Low speed prescaler (APB1)              */
+/*                       1- clock not divided                      */
+/*                       2- AHB clock divided by 2                  */
+/*                       3- AHB clock divided by 4                  */
+/*                       3- AHB clock divided by 8                  */
+/*                       3- AHB clock divided by 16                 */
+/*******************************************************************/
+
+#define APB1_PRE_SCALER     CLOCK_NOT_DIVIDED  
+#define APB2_PRE_SCALER     CLOCK_NOT_DIVIDED
+
+/**********************************************************************/
+/*                                                                    */
+/*                      high-speed prescaler(AHB)                     */
+/*                       1- system Clock not divided                  */
+/*                       2- system clock divided by 2                 */
+/*                       3- system clock divided by 4                 */
+/*                       4- system clock divided by 8                 */
+/*                       5- system clock divided by 16                */
+/*                       6- system clock divided by 64                */
+/*                       7- system clock divided by 128               */
+/*                       8- system clock divided by 256               */
+/*                       9- system clock divided by 512               */
+/**********************************************************************/
+
+#define AHB_PRE_SCALER     CLOCK_NOT_DIVIDED
+
+
+/*******************************************************************/
+/*                                                                 */
+/*                       ClockType Maybe :                         */
+/*                       1-HSI                                     */
+/*                       2-HSE                                     */
+/*                       3-PLL                                     */
+/*                       4-HSE_BYPASS                              */
+/*                                                                 */
+/*******************************************************************/
+#define HSE_FREQ_VALUE    25
+#define HSI_FREQ_VALUE    16
+
+#define CLOCK_TYPE       HSE
+
+/*********************************** Check IF CLock Type is PLL *****************************************/
+#if  CLOCK_TYPE == PLL
+
+#define PLL_CLOCK_SOURCE   HSE
+
+
+/********************************************************************************************/
+/*                                                                                           */
+/*                   ClockFactor For PLLN  Should be 192 ≤ PLLN ≤ 432                        */
+/*                    any other Factor would be wrong configuration                          */
+/*                                PLL_CLOCk_MULTIPLE_BY_192                                 */
+/*                                PLL_CLOCk_MULTIPLE_BY_X                                   */
+/*                                        .....                                              */
+/*                                 PLL_CLOCk_MULTIPLE_BY_433                                */
+/*                                                                                           */
+/********************************************************************************************/
+
+#define PLL_CLOCK_MULTIPLE_FACTOR     192
+
+/********************************************************************************************/
+/*                                                                                          */
+/*                   ClockFactor For PLLM  Should be 2 ≤ PLLM ≤ 63                          */
+/*                    any other Factor would be wrong configuration                         */
+/*                                PLL_CLOCk_DIVIED_BY_2                                     */
+/*                                PLL_CLOCk_DIVIED_BY_X                                     */
+/*                                        .....                                             */
+/*                                PLL_CLOCk_DIVIED_BY_63                                    */
+/*                                                                                          */
+/********************************************************************************************/
+
+#define PLL_CLOCKk_DIVIED_FACTOR   20
+
+
+/********************************************************************************************/
+/*                                                                                           */
+/*                   division factor for main system clock 2 ≤ PLLP ≤ 8                      */
+/*                    any other Factor would be wrong configuration                          */
+/*                                PLLP_CLOCK_DIVIED_BY_2                                     */
+/*                                PLLP_CLOCK_DIVIED_BY_4                                     */
+/*                                PLLP_CLOCK_DIVIED_BY_6                                     */
+/*                                PLLP_CLOCK_DIVIED_BY_8                                     */
+/********************************************************************************************/
+#define PLLP_CLOCK_DIVIED_FACTOR         PLLP_CLOCK_DIVIED_BY_4
+
+#endif
+/**********************************************************************/
+/*                                                                    */
+/*                 Clock Security System May be                       */
+/*                 1-Enable:                                          */
+/* 				  	-To Set HSI By H.W When There are Failure In HSE  */
+/* 				    -To Set HSI By H.W When Leaving Stop Or Standby   */
+/* 				   2-Disable                                          */
+/* 				   The Previouse Feature Does not Happen              */
+/*                                                                    */
+/**********************************************************************/
+
+#define CLOCK_SECURITY_SYSTEM     DISABLE_CLOCK_SECURITY_SYSTEM
+
+
+
+#endif /* RCC_CFG_H_ */

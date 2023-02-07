@@ -1,0 +1,256 @@
+/*
+ * RCC.h
+ *
+ *  Created on: Jan 30, 2023
+ *      Author: samir
+ */
+
+#ifndef RCC_H_
+#define RCC_H_
+
+typedef enum 
+{
+    RCC_OK,
+    RCC_NOTOK,
+    RCC_InvalidClockType,
+    RCC_InvalidPLLsource,
+    RCC_TimeOut,
+    RCC_InvalidPeripheral,
+    RCC_Wrong_Clock_Security_System_Configuration_Choice,
+    RCC_Wrong_PLL_Configuration_Choice
+}RCC_enuErrorStatus;
+
+
+/********************************************** State of the Peripheral ***********************************************************/
+typedef enum
+{
+    ENABLE_PERIPHERAL,
+    DISABLE_PERIPHERAL,
+    RESET_PERIPHERAL
+}RCC_enuPeripheralState;
+
+/*********************************** AHB1 Peripheral Enable/Reset ********************************************************/
+typedef enum
+{
+    GPIOA,
+    GPIOB,
+    GPIOC,
+    GPIOD,
+    GPIOE,
+    GPIOH=7,
+    CRC=12,
+    DMA1=21,
+    DAM2
+}RCC_enuAHB1_Peripheral_EN_RST;
+
+/*********************************** AHB2 Peripheral Enable/ Reset ********************************************************/
+
+typedef enum
+{
+    OTGFS =7
+}RCC_enuAHB2_Peripheral_EN_RST;
+
+/*********************************** APB1 Peripheral Enable/Reset ********************************************************/
+
+typedef enum
+{
+    TIM2,
+    TIM3,
+    TIM4,
+    TIM5,
+    WWDG=11,
+    SPI2=14,
+    SPI3,
+    USART2=17,
+    I2C1=21,
+    I2C2,
+    I2C3,
+    PWR=28
+}RCC_enuAPB1_Peripheral_EN_RST;
+
+/*********************************** AHB2 Peripheral Enable/Reset ********************************************************/
+
+typedef enum
+{
+    TIM1,
+    USART1=4,
+    USART6,
+    ADC1=8,
+    SDIO=11,
+    SPI1,
+    SPI4,
+    SYSCFG,
+    TIM9=16,
+    TIM10,
+    TIM11
+}RCC_enuAPB2_Peripheral_EN_RST;
+
+
+
+/*******************************************************************/
+/*                                                                 */
+/*                       PeripheralBus  Maybe :                    */
+/*                       1-AHB1                                    */
+/*                       2-AHB2                                    */
+/*                       3-APB1                                    */
+/*                       3-APB2                                    */
+/*******************************************************************/
+#define    AHB1_BUS       0
+#define    AHB2_BUS       1
+#define    APB1_BUS       2
+#define    APB2_BUS       3
+
+typedef enum
+{
+    RCC_HSI,
+    RCC_HSE,
+    RCC_PLL
+
+}RCC_CLOCK;
+
+/*******************************************************************/
+/*                                                                 */
+/*                      APB high-speed prescaler(APB2)             */
+/*                      APB Low speed prescaler (APB1)              */
+/*                       1- clock not divided                      */
+/*                       2- AHB clock divided by 2                  */
+/*                       3- AHB clock divided by 4                  */
+/*                       3- AHB clock divided by 8                  */
+/*                       3- AHB clock divided by 16                 */
+/*******************************************************************/
+#define CLOCK_NOT_DIVIDED        0 
+#define AHB_CLOCK_DIVIDED_BY_2   1
+#define AHB_CLOCK_DIVIDED_BY_4   2
+#define AHB_CLOCK_DIVIDED_BY_8   3
+#define AHB_CLOCK_DIVIDED_BY_16  4
+
+/**********************************************************************/
+/*                                                                    */
+/*                      high-speed prescaler(AHB)                     */
+/*                       1- system Clock not divided                  */
+/*                       2- system clock divided by 2                 */
+/*                       3- system clock divided by 4                 */
+/*                       4- system clock divided by 8                 */
+/*                       5- system clock divided by 16                */
+/*                       6- system clock divided by 64                */
+/*                       7- system clock divided by 128               */
+/*                       8- system clock divided by 256               */
+/*                       9- system clock divided by 512               */
+/**********************************************************************/
+
+#define SYSTEM_CLOCK_NOT_DIVIDED      0  
+#define SYSTEM_CLOCK_DIVIDED_BY_2     1
+#define SYSTEM_CLOCK_DIVIDED_BY_4     2
+#define SYSTEM_CLOCK_DIVIDED_BY_8     3
+#define SYSTEM_CLOCK_DIVIDED_BY_16    4
+#define SYSTEM_CLOCK_DIVIDED_BY_64    5
+#define SYSTEM_CLOCK_DIVIDED_BY_128   6
+#define SYSTEM_CLOCK_DIVIDED_BY_256   7
+#define SYSTEM_CLOCK_DIVIDED_BY_512   8
+
+
+/*******************************************************************/
+/*                                                                 */
+/*                       ClockType Maybe :                         */
+/*                       1-HSI                                     */
+/*                       2-HSE                                     */
+/*                       3-PLL                                     */
+/*                          *PLL_Source                            */
+/*                               3.1-PLL_HSI_DIVIDED_BY_2          */
+/*                               3.2-PLL_HSE                       */
+/*                               3.3-PLL_HSE_DIVIDED_BY_2          */
+/*                               3.4-PLL_HSE_DIVIDED_BY_3          */
+/*                               3.5-PLL_HSE_DIVIDED_BY_4          */
+/*                               ...                               */
+/*                               3.62-PLL_HSE_DIVIDED_BY_62        */
+/*                               3.63-PLL_HSE_DIVIDED_BY_63        */
+/*                       4-HSE_BYPASS                              */
+/*                                                                 */
+/*******************************************************************/
+
+#define HSI                         0
+#define HSE                         16
+#define PLL                         24
+
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 Clock Security System May be                       */
+/*                 1-Enable:                                          */
+/* 				   To Set HSI By H.W When There are Failure In HSE    */
+/* 				   To Set HSI By H.W When Leaving Stop Or Standby     */
+/* 				   2-Disable                                          */
+/* 				   The Previouse To Feature Doesnot Happen            */
+/*                                                                    */
+/**********************************************************************/
+
+#define DISABLE_CLOCK_SECURITY_SYSTEM              0
+#define ENABLE_CLOCK_SECURITY_SYSTEM               1
+
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_INIT  function                                 */
+/* 				   input: void                                        */
+/* 				   output: RCC_enuErrorStatus                         */
+/*                                                                    */
+/**********************************************************************/
+RCC_enuErrorStatus RCC_enuInit( void );
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_EnablePeripheralClock  function                */
+/* 				   input: PeripheralBus,  Copy_u8Peripheral           */
+/* 				   output: RCC_enuErrorStatus                         */
+/*                                                                    */
+/**********************************************************************/
+RCC_enuErrorStatus RCC_enuEnablePeripheralClock ( u8 Copy_u8PeripheralBus  , u8 Copy_u8Peripheral );
+
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_INIT  function                                 */
+/* 				   input: PeripheralBus,  Copy_u8Peripheral           */
+/* 				   output: RCC_enuErrorStatus                         */
+/*                                                                    */
+/**********************************************************************/
+RCC_enuErrorStatus RCC_enuDisablePeripheralClock( u8 Copy_u8PeripheralBus  , u8 Copy_u8Peripheral );
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_ResetPeripheralClock  function                */
+/* 				   input: PeripheralBus,  Copy_u8Peripheral           */
+/* 				   output: RCC_enuErrorStatus                         */
+/*                                                                    */
+/**********************************************************************/
+RCC_enuErrorStatus RCC_enuResetPeripheralClock ( u8 Copy_u8PeripheralBus  , u8 Copy_u8Peripheral );
+
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_SetPrescaler  function                         */
+/* 				   input:   void                                      */
+/* 				   output: RCC_enuErrorStatus                         */
+/*                                                                    */
+/**********************************************************************/
+RCC_enuErrorStatus RCC_enuSetPrescaler(void );
+
+
+/**********************************************************************/
+/*                                                                    */
+/*                 RCC_RuningSysClock  function                       */
+/* 				   input: void                                        */
+/* 				   output: RCC_BUSs                                   */
+/*                                                                    */
+/**********************************************************************/
+RCC_CLOCK RCC_enuRuningSysClock (void);
+
+
+
+
+#endif /* RCC_H_ */

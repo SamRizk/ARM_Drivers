@@ -1,0 +1,17 @@
+
+#include "../include/MCLA/RCC/RCC.h"
+
+int
+main(void)
+{
+
+	RCC_setHSESystemClock();
+  // At this stage the system clock should have already been configured
+  // at high speed.
+
+  // Infinite loop
+  while (1)
+    {
+       // Add your code here.
+    }
+}

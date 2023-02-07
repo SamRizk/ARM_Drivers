@@ -1,0 +1,16 @@
+#include "../include/LIB/Bit_math.h"
+#include "../include/LIB/Std_types.h"
+#include "../include/MCLA/RCC/RCC.h"
+
+int
+main(void)
+{
+  // At this stage the system clock should have already been configured
+  // at high speed.
+
+  // Infinite loop
+  while (1)
+    {
+       // Add your code here.
+    }
+}

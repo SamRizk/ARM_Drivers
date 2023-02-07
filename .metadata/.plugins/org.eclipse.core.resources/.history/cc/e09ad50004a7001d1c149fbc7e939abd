@@ -1,0 +1,18 @@
+
+#include "../include/MCLA/RCC/RCC.h"
+#define  ADDR       0x40023800
+int
+main(void)
+{
+
+	MEM_ADDR(BIT BAND(ADDR,16)) = 0x1;
+
+	// At this stage the system clock should have already been configured
+  // at high speed.
+
+  // Infinite loop
+  while (1)
+    {
+       // Add your code here.
+    }
+}
